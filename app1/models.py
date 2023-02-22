@@ -58,3 +58,12 @@ class Courses(models.Model):
 
     def __str__(self):
         return self.Course_name
+
+class evaluations(models.Model):
+    # course = models.ManyToManyField(Courses)
+    projectname= models.CharField(max_length=100, blank=True)
+    email= models.CharField(max_length=100, blank=True)
+    score= models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.projectname

@@ -5,8 +5,11 @@ urlpatterns = [
     path('',views.Sign_up,name="Sign_up"),
     path('answer/',views.answer, name="answer"),
     path('login/',views.login, name="login"),
-    path('loginn/',views.login, name="login"),
+    # path('loginn/',views.login, name="login"),
+    
     path('logged/',views.logged, name="logged"),
     path('dashboard/',views.dashboard, name="dashboard"),
-    path('<int:course_id>', views.course, name="course")
+    path('<int:course_id>', views.course, name="course"),
+    path('course/',views.course,name="course"),
+    path('evaluations/',views.evaluations,name="evaluations")
 ]

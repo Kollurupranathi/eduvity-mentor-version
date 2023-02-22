@@ -1,8 +1,9 @@
 from multiprocessing import context
 from unicodedata import name
 from django.http import HttpResponse
-from . models import Que, Courses
+from . models import Que, Courses, evaluations
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 
 # Create your views here.
 # def que(request):
@@ -65,7 +66,12 @@ def login(request):
                             "emailId":emailId,
                             "hi":go
                         }
-                        return render(request, 'project1/dashBoard.html',context)
+                        courses = Courses.objects.all()
+                        context={
+                            'Courses' :courses
+                        }
+                        return render(request,'project1/dashBoard.html', context)
+                        # return render(request, 'project1/dashBoard.html')
                     else:
                         return HttpResponse("The password you entered does not match to this username")
                 else:
@@ -102,3 +108,15 @@ def course(request, course_id):
         'course':course
      }
      return render(request, 'project1/course.html', context)
+
+def evaluations(request):
+    if request.method == 'POST':
+        projectname = request.POST['projectname']
+        email = request.POST['email']
+        score= request.POST['score']
+        answerr=evaluations(projectname= projectname, email= email, score=score)
+        print(answerr)
+        answerr.save()
+        return render(request, 'project1/dashBoard.html')
+    else:
+        return HttpResponse("something is wrong")
